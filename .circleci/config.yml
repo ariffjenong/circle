@@ -13,15 +13,15 @@ jobs:
       - run:
           context: $rclone_config
           command: |
-           cd
+           cd ~/project
            ls -lh
            mkdir lineage-19.1
            mkdir znxt
-           mkdir -p ~/.config/rclone
+           mkdir -p ~/project/.config/rclone
            ls -lh
-           echo $rclone_config > ~/.config/rclone/rclone.conf
-           ls ~/.config/rclone
-           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz znxt -P
+           echo $rclone_config > ~/project/.config/rclone/rclone.conf
+           ls ~/project/.config/rclone
+           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz ~/project/znxt -P
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
