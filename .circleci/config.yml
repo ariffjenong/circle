@@ -9,13 +9,14 @@ jobs:
    resource_class: large
    steps: 
       - run:
+          context: rclone_config
           command: |
            cd ~ && rm -rf lineage-19.1 && rm -rf znxt
            mkdir -p ~/lineage-19.1
            mkdir -p ~/znxt
            mkdir -p ~/.config/rclone
            echo "$rclone_config" > ~/.config/rclone/rclone.conf
-           time rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz ~/znxt -P
+           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz ~/znxt -P
            cd ~/znxt
            time tar xf ccache.tar.gz
            rm ccache.tar.gz
