@@ -7,7 +7,7 @@ jobs:
     - image: arifjenong/rom:cirrus
       auth:
           username: arifjenong
-          password: DOCKER_HUB_PWD
+          password: $DOCKER_HUB_PWD
    resource_class: large
    steps: 
       - run:
