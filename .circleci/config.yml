@@ -20,7 +20,7 @@ jobs:
            ls -lh
            echo $rclone_config > /.config/rclone/rclone.conf
            ls /.config/rclone
-           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz root/znxt -P
+           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz znxt -P
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
