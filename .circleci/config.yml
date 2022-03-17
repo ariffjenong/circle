@@ -1,1 +1,64 @@
-
+version: 2.1
+env:
+    ROM_PROJECT: "lineage-19.1"
+jobs:
+  compile:
+   docker:
+    - image: arifjenong/rom:cirrus
+      auth:
+   resource_class: large
+   timeout: 240m
+   steps:
+      - run env background:
+          command: |
+           cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
+           mkdir -p ~/$ROM_PROJECT
+           mkdir -p ~/znxt
+           mkdir -p ~/.config/rclone
+           echo "$rclone_config" > ~/.config/rclone/rclone.conf
+           
+      - run Download background:
+          command: |
+           time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz ~/znxt -P
+           cd ~/znxt
+           time tar xf ccache.tar.gz
+           rm ccache.tar.gz
+           #time rclone copy znxtproject:ccache/$ROM_PROJECT/out.tar.gz ~/$ROM_PROJECT -P
+           #cd ~/$ROM_PROJECT
+           #time tar xf out.tar.gz
+           #rm -rf out.tar.gz
+           #sleep 13m
+           #cd ~/$ROM_PROJECT
+           #ls -lh
+           
+      - run sync:
+          command: |
+           cd ~/$ROM_PROJECT
+           repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
+           git clone https://github.com/ariffjenong/local_manifest.git --depth=1 -b LOS19 .repo/local_manifests
+           repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+           
+      - run build:
+          command: |
+           bash build.sh
+           
+      - run upload background:
+          command: |
+           cd ~/$ROM_PROJECT/out/target/product/maple_dsds
+           ls -lh
+           rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/$ROM_PROJECT -P && rclone copy $(ls *.md5sum) znxtproject:rom/$ROM_PROJECT -P && ls -lh
+           
+      - run uploadCc:
+          command: |
+           bash build_zip.sh
+           
+      - run sf:
+          command: |
+           #bash sf.sh
+           cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
+           
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
