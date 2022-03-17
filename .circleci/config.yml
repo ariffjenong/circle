@@ -14,23 +14,23 @@ jobs:
           context: $rclone_config
           command: |
            ls -lh
-           mkdir -p ~/lineage-19.1
-           mkdir -p ~/znxt
-           mkdir -p ~/.config/rclone
-           echo $rclone_config > ~/.config/rclone/rclone.conf
-           ls ~/.config/rclone
-           #rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz ~/znxt -P
-           #cd ~/znxt
+           mkdir lineage-19.1
+           mkdir znxt
+           mkdir -p .config/rclone
+           echo $rclone_config > .config/rclone/rclone.conf
+           ls .config/rclone
+           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz znxt -P
+           #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
-           #time rclone copy znxtproject:ccache/lineage-19.1/out.tar.gz ~/lineage-19.1 -P
-           #cd ~/lineage-19.1
+           #time rclone copy znxtproject:ccache/lineage-19.1/out.tar.gz lineage-19.1 -P
+           #cd lineage-19.1
            #time tar xf out.tar.gz
            #rm -rf out.tar.gz
            #sleep 13m
-           #cd ~/lineage-19.1
+           #cd lineage-19.1
            #ls -lh
-           cd ~/lineage-19.1
+           cd lineage-19.1
            git config --global user.name "ariffjenong"
            git config --global user.email "arifbuditantodablekk@gmail.com"
            repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
@@ -39,7 +39,7 @@ jobs:
            . build/envsetup.sh
            lunch lineage_maple_dsds-userdebug
            export SELINUX_IGNORE_NEVERALLOWS=true
-           export CCACHE_DIR=~/znxt/ccache
+           export CCACHE_DIR=znxt/ccache
            export CCACHE_EXEC=$(which ccache)
            export USE_CCACHE=1
            ccache -M 15G
@@ -61,18 +61,18 @@ jobs:
            #kill %1
            
            make bacon -j12
-           #curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd ~/$ROM_PROJECT/out/target/product/maple_dsds/ && ls *maple*UNOFFICIAL*.zip) Completed!"
+           #curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd $ROM_PROJECT/out/target/product/maple_dsds/ && ls *maple*UNOFFICIAL*.zip) Completed!"
 
 
             
            ccache -s
            #bash build.sh
-           cd ~/lineage-19.1/out/target/product/maple_dsds
+           cd out/target/product/maple_dsds
            ls -lh
            rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/lineage-19.1 -P && rclone copy $(ls *.md5sum) znxtproject:rom/lineage-19.1 -P && ls -lh
            #bash build_zip.sh
            #bash sf.sh
-           cd ~ && rm -rf lineage-19.1 && rm -rf znxt
+           cd ../../../.. && rm -rf lineage-19.1 && rm -rf znxt
            
 workflows:
   version: 2.1
