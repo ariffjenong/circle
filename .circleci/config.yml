@@ -16,10 +16,10 @@ jobs:
            cd
            mkdir lineage-19.1
            mkdir znxt
-           mkdir -p root/.config/rclone
+           mkdir -p /.config/rclone
            ls -lh
-           echo $rclone_config > root/.config/rclone/rclone.conf
-           ls root/.config/rclone
+           echo $rclone_config > /.config/rclone/rclone.conf
+           ls /.config/rclone
            rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz root/znxt -P
            #cd znxt
            #time tar xf ccache.tar.gz
