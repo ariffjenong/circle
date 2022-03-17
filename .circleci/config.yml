@@ -1,6 +1,5 @@
 version: 2.1
-env:
-    ROM_PROJECT: "lineage-19.1"
+
 jobs:
   timeout: 240m
   compile:
@@ -11,6 +10,7 @@ jobs:
    steps: 
       - run:
           command: |
+          ROM_PROJECT=lineage-19.1
            cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
            mkdir -p ~/$ROM_PROJECT
            mkdir -p ~/znxt
