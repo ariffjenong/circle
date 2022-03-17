@@ -2,12 +2,12 @@ version: 2.1
 env:
     ROM_PROJECT: "lineage-19.1"
 jobs:
+  timeout: 240m
   compile:
    docker:
     - image: arifjenong/rom:cirrus
       auth:
    resource_class: large
-   timeout: 240m
    steps: 
       - run:
           command: |
@@ -31,12 +31,16 @@ jobs:
            repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
            git clone https://github.com/ariffjenong/local_manifest.git --depth=1 -b LOS19 .repo/local_manifests
            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-           bash build.sh
+           #bash build.sh
            cd ~/$ROM_PROJECT/out/target/product/maple_dsds
            ls -lh
            rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/$ROM_PROJECT -P && rclone copy $(ls *.md5sum) znxtproject:rom/$ROM_PROJECT -P && ls -lh
-           
-           bash build_zip.sh
+           #bash build_zip.sh
            #bash sf.sh
            cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
            
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
