@@ -9,7 +9,7 @@ jobs:
    resource_class: large
    timeout: 240m
    steps:
-      - run env background:
+      - run:
           command: |
            cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
            mkdir -p ~/$ROM_PROJECT
@@ -17,7 +17,7 @@ jobs:
            mkdir -p ~/.config/rclone
            echo "$rclone_config" > ~/.config/rclone/rclone.conf
            
-      - run Download background:
+      - run:
           command: |
            time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz ~/znxt -P
            cd ~/znxt
@@ -31,28 +31,28 @@ jobs:
            #cd ~/$ROM_PROJECT
            #ls -lh
            
-      - run sync:
+      - run:
           command: |
            cd ~/$ROM_PROJECT
            repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
            git clone https://github.com/ariffjenong/local_manifest.git --depth=1 -b LOS19 .repo/local_manifests
            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
            
-      - run build:
+      - run:
           command: |
            bash build.sh
            
-      - run upload background:
+      - run:
           command: |
            cd ~/$ROM_PROJECT/out/target/product/maple_dsds
            ls -lh
            rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/$ROM_PROJECT -P && rclone copy $(ls *.md5sum) znxtproject:rom/$ROM_PROJECT -P && ls -lh
            
-      - run uploadCc:
+      - run:
           command: |
            bash build_zip.sh
            
-      - run sf:
+      - run:
           command: |
            #bash sf.sh
            cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
