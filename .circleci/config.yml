@@ -11,6 +11,11 @@ jobs:
       - run:
           context: rclone_config
           command: |
+           export DEBIAN_FRONTEND=noninteractive
+           apt update
+           apt install sudo
+           apt install time
+           apt install rclone
            cd ~ && rm -rf lineage-19.1 && rm -rf znxt
            mkdir -p ~/lineage-19.1
            mkdir -p ~/znxt
