@@ -11,9 +11,9 @@ jobs:
    resource_class: large
    steps: 
       - run:
-          context: rclone_config
+          context: $rclone_config
           command: |
-           cd ~ && rm -rf lineage-19.1 && rm -rf znxt
+           ls -lh
            mkdir -p ~/lineage-19.1
            mkdir -p ~/znxt
            mkdir -p ~/.config/rclone
