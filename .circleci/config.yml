@@ -14,9 +14,9 @@ jobs:
           context: $rclone_config
           command: |
            cd ..
-           mkdir -p /.config/rclone
+           mkdir -p .config/rclone
            pwd
-           echo $rclone_config > /.config/rclone/rclone.conf
+           echo $rclone_config > ~/.config/rclone/rclone.conf
            cd project
            mkdir lineage-19.1
            mkdir znxt
