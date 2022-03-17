@@ -14,12 +14,12 @@ jobs:
           context: $rclone_config
           command: |
            cd
-           ls -lh
            mkdir lineage-19.1
            mkdir znxt
            mkdir -p root/.config/rclone
+           ls -lh
            echo $rclone_config > root/.config/rclone/rclone.conf
-           ls .config/rclone
+           ls root/.config/rclone
            rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz root/znxt -P
            #cd znxt
            #time tar xf ccache.tar.gz
@@ -31,7 +31,9 @@ jobs:
            #sleep 13m
            #cd lineage-19.1
            #ls -lh
+           ls -lh
            cd lineage-19.1
+           ls -lh
            git config --global user.name "ariffjenong"
            git config --global user.email "arifbuditantodablekk@gmail.com"
            repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
