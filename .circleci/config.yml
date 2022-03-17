@@ -6,6 +6,8 @@ jobs:
    docker:
     - image: arifjenong/rom:cirrus
       auth:
+          username: arifjenong
+          password: DOCKER_HUB_PWD
    resource_class: large
    steps: 
       - run:
@@ -29,6 +31,8 @@ jobs:
            #cd ~/lineage-19.1
            #ls -lh
            cd ~/lineage-19.1
+           git config --global user.name "ariffjenong"
+           git config --global user.email "arifbuditantodablekk@gmail.com"
            repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
            git clone https://github.com/ariffjenong/local_manifest.git --depth=1 -b LOS19 .repo/local_manifests
            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
