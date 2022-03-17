@@ -17,8 +17,8 @@ jobs:
            mkdir znxt
            mkdir -p $CIRCLE_WORKING_DIRECTORY/.config/rclone
            ls -lh
-           echo $rclone_config > $CIRCLE_WORKING_DIRECTORY/.config/rclone/rclone.conf
-           ls $CIRCLE_WORKING_DIRECTORY/.config/rclone
+           echo $rclone_config > ~/root/.config/rclone/rclone.conf
+           ls ~/root/.config/rclone
            rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz $CIRCLE_WORKING_DIRECTORY/znxt -P
            #cd znxt
            #time tar xf ccache.tar.gz
