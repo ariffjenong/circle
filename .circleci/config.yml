@@ -14,7 +14,7 @@ jobs:
           context: $rclone_config
           command: |
            mkdir -p ~/root/.config/rclone
-           cd project
+           pwd
            mkdir lineage-19.1
            mkdir znxt
            ls -lh
