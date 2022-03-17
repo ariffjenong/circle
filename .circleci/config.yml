@@ -21,7 +21,7 @@ jobs:
            mkdir lineage-19.1
            mkdir znxt
            ls -lh
-           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz $CIRCLE_WORKING_DIRECTORY/znxt -P
+           rclone ls znxtproject:ccache/lineage-19.1
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
