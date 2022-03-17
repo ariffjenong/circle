@@ -9,8 +9,8 @@ jobs:
    resource_class: large
    timeout: 240m
    steps:
-      - run:
        name: env background 
+      - run:
           command: |
            cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
            mkdir -p ~/$ROM_PROJECT
@@ -19,6 +19,7 @@ jobs:
            echo "$rclone_config" > ~/.config/rclone/rclone.conf
            
        name: Download background
+      - run:
           command: |
            time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz ~/znxt -P
            cd ~/znxt
@@ -33,6 +34,7 @@ jobs:
            #ls -lh
            
        name: sync
+      - run:
           command: |
            cd ~/$ROM_PROJECT
            repo init --depth=1 --no-repo-verify -u https://github.com/ariffjenong/android.git -b lineage-19.1 -g default,-mips,-darwin,-notdefault
@@ -40,20 +42,24 @@ jobs:
            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
            
        name: build
+      - run:
           command: |
            bash build.sh
            
        name: upload background
+      - run:
           command: |
            cd ~/$ROM_PROJECT/out/target/product/maple_dsds
            ls -lh
            rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/$ROM_PROJECT -P && rclone copy $(ls *.md5sum) znxtproject:rom/$ROM_PROJECT -P && ls -lh
            
        name: uploadCc
+      - run:
           command: |
            bash build_zip.sh
            
        name: sf
+      - run:
           command: |
            #bash sf.sh
            cd ~ && rm -rf $ROM_PROJECT && rm -rf znxt
