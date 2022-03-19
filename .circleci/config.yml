@@ -14,10 +14,9 @@ jobs:
           no_output_timeout: "2h"
           command: |
            pwd
-           cd ~
-           mkdir -p .config/rclone
+           mkdir -p ~/.config/rclone
            ls -lh
-           echo $rclone_config >> ~/.config/rclone/rclone.conf
+           echo $rclone_config > ~/.config/rclone/rclone.conf
            cd project
            mkdir lineage-19.1
            mkdir znxt && cd znxt
@@ -82,7 +81,7 @@ jobs:
            rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/lineage-19.1 -P && rclone copy $(ls *.md5sum) znxtproject:rom/lineage-19.1 -P && ls -lh
            #bash build_zip.sh
            #bash sf.sh
-           cd ~/project && rm -rf lineage-19.1 && rm -rf znxt
+           cd ../../../.. && rm -rf lineage-19.1 && rm -rf znxt
            
 workflows:
   version: 2.1

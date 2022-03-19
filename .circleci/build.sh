@@ -6,11 +6,11 @@ nproc
 cat /etc/os*
 env
 
- cd ~/$ROM_PROJECT
+ cd $ROM_PROJECT
  . build/envsetup.sh
  lunch lineage_maple_dsds-userdebug
  export SELINUX_IGNORE_NEVERALLOWS=true
- export CCACHE_DIR=~/znxt/ccache
+ export CCACHE_DIR=znxt/ccache
  export CCACHE_EXEC=$(which ccache)
  export USE_CCACHE=1
  ccache -M 15G
@@ -32,6 +32,6 @@ sleep 103m #third running
 kill %1
  
 #make bacon -j12
-#curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd ~/$ROM_PROJECT/out/target/product/maple_dsds/ && ls *maple*UNOFFICIAL*.zip) Completed!"
+#curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd $ROM_PROJECT/out/target/product/maple_dsds/ && ls *maple*UNOFFICIAL*.zip) Completed!"
       
 ccache -s
