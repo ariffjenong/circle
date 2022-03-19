@@ -16,7 +16,7 @@ jobs:
            pwd
            mkdir -p ~/.config/rclone
            ls -lh
-           echo $rclone_config > ~/.config/rclone/rclone.conf
+           echo $rclone_config# > ~/.config/rclone/rclone.conf
            mkdir lineage-19.1
            mkdir znxt && cd znxt
            rclone config file
