@@ -24,9 +24,10 @@ jobs:
            mkdir znxt && cd znxt
            ls -lh
            f=pwd
+           $f
            cd ..
            rclone config file
-           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz $f -P
+           rclone ls znxtproject:ccache/lineage-19.1
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
