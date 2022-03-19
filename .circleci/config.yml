@@ -26,8 +26,8 @@ jobs:
            f=pwd
            $f
            cd ..
-           rclone config file
-           rclone ls znxtproject:ccache
+           rclone config file && rclone listremotes
+           #rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz $f -P
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
