@@ -17,16 +17,11 @@ jobs:
            mkdir -p ~/.config/rclone
            ls -lh
            echo $rclone_config > ~/.config/rclone/rclone.conf
-           cd project
            mkdir lineage-19.1
            mkdir znxt && cd znxt
-           ls -lh
-           f=pwd
-           $f
-           cd ..
            rclone config file
            rclone listremotes
-           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz $f -P
+           rclone copy znxtproject:ccache/lineage-19.1/ccache.tar.gz znxt -P
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
