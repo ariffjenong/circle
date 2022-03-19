@@ -8,14 +8,15 @@ jobs:
       auth:
           username: arifjenong
           password: $DOCKER_HUB_PWD
-   resource_class: xlarge
+   resource_class: large
    steps: 
       - run:
+          no_output_timeout: "2h"
           context: $rclone_config
           command: |
-           cd ..
-           mkdir -p .config/rclone
            pwd
+           cd ~
+           ls -lh
            echo $rclone_config > ~/.config/rclone/rclone.conf
            cd project
            mkdir lineage-19.1
