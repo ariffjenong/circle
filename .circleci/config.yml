@@ -16,7 +16,7 @@ jobs:
           command: |
            pwd
            cd ~
-           mkdir .config/rclone
+           mkdir -p .config/rclone
            ls -lh
            echo "$rclone_config" > ~/.config/rclone/rclone.conf
            cd project
