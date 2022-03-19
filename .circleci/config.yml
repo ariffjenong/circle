@@ -27,7 +27,7 @@ jobs:
            $f
            cd ..
            rclone config file
-           rclone ls znxtproject:ccache/lineage-19.1
+           rclone ls znxtproject:ccache
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
