@@ -9,9 +9,8 @@ jobs:
    steps: 
       - run:
           command: |
-           LABEL maintainer="ariffjenong <arifbuditantodablekk@gmail.com>"
            ENV DEBIAN_FRONTEND noninteractive
-           
+            
            WORKDIR /cirrus
            
            RUN apt-get -yqq update \
