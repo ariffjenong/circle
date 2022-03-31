@@ -4,78 +4,13 @@ jobs:
   timeout: 240m
   compile:
    docker:
-    - image: arifjenong/rom:cherish
-      auth:
-          username: arifjenong
-          password: $DOCKER_HUB_PWD
+    - image: ubuntu:focal
    resource_class: large
    steps: 
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run:
           command: |
-           pwd
-           mkdir -p ~/.config/rclone
            ls -lh
-           echo $rclone_config > ~/.config/rclone/rclone.conf
-           rclone config file
-           rclone listremotes
-           time rclone copy znxtproject:ccache/cherish-12.1/ccache.tar.gz /cirrus -P
-           #cd znxt
-           #time tar xf ccache.tar.gz
-           #rm ccache.tar.gz
-           #time rclone copy znxtproject:ccache/lineage-19.1/out.tar.gz lineage-19.1 -P
-           #cd lineage-19.1
-           #time tar xf out.tar.gz
-           #rm -rf out.tar.gz
-           #sleep 13m
-           #cd ..
-           ls -lh
-           cd /cirrus
-           time tar xf ccache.tar.gz
-           rm ccache.tar.gz
-           ls -lh
-           cd rom
-           git config --global user.name "ariffjenong"
-           git config --global user.email "arifbuditantodablekk@gmail.com"
-           repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-           . build/envsetup.sh
-           lunch cherish_maple_dsds-userdebug
-           export CCACHE_DIR=/cirrus/ccache
-           export CCACHE_EXEC=$(which ccache)
-           export USE_CCACHE=1
-           ccache -M 50G
-           ccache -z
-           export ALLOW_MISSING_DEPENDENCIES=true
-           #export CHERISH_VANILLA=true
-           export BUILD_HOSTNAME=ArifJeNong
-           export BUILD_USERNAME=ArifJeNong
-           export TZ=Asia/Jakarta
-           #curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="$(echo "${var_cache_report_config}")"
-           #make sepolicy -j24
-           #make bootimage -j24
-           #make init -j24
-           #make services
-           #make bacon -j24 &  #dont remove that '&'
-           #sleep 50m #first running
-           #sleep 90m #second running
-           #sleep 103m #third running
-           #kill %1
-           
-           mka bacon -j24
-           #curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd $ROM_PROJECT/out/target/product/maple_dsds/ && ls *maple*UNOFFICIAL*.zip) Completed!"
-
-
-            
-           ccache -s
-           #bash build.sh
-           cd out/target/product/maple_dsds
-           ls -lh
-           time rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/cherish-12.1/maple_dsds -P && time rclone copy $(ls *.md5sum) znxtproject:rom/cherish-12.1/maple_dsds -P && ls -lh
-           #bash build_zip.sh
-           #bash sf.sh
-           cd ../../../.. && rm -rf rom && rm -rf ccache
+           bash Dockerfile.sh
            
 workflows:
   version: 2.1
