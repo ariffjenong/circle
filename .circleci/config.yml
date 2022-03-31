@@ -19,7 +19,7 @@ jobs:
            echo $rclone_config > ~/.config/rclone/rclone.conf
            rclone config file
            rclone listremotes
-           time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz /cirrus -P
+           time rclone copy znxtproject:ccache/cherish-12.1/ccache.tar.gz /cirrus -P
            #cd znxt
            #time tar xf ccache.tar.gz
            #rm ccache.tar.gz
@@ -70,7 +70,7 @@ jobs:
            #bash build.sh
            cd out/target/product/maple_dsds
            ls -lh
-           rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/lineage-19.1 -P && rclone copy $(ls *.md5sum) znxtproject:rom/lineage-19.1 -P && ls -lh
+           time rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/cherish-12.1/maple_dsds -P && time rclone copy $(ls *.md5sum) znxtproject:rom/cherish-12.1/maple_dsds -P && ls -lh
            #bash build_zip.sh
            #bash sf.sh
            cd ../../../.. && rm -rf rom && rm -rf ccache
