@@ -26,8 +26,7 @@ jobs:
            repo init --depth=1 --no-repo-verify -u $Nusantara -g default,-mips,-darwin,-notdefault
            rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
            #rclone copy znxtproject:NusantaraProject/manifest/local_nad.xml .repo/local_manifests -P
-           repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-           repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+           repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
            git clone --depth=1 https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b maple_dsds-12.1 kernel/sony/msm8998
            git clone --depth=1 https://github.com/NusantaraROM-Devices/android_device_sony_yoshino-common -b 12.1 device/sony/yoshino-common
            git clone --depth=1 https://github.com/NusantaraROM-Devices/android_device_sony_maple_dsds -b 12.1 device/sony/maple_dsds
