@@ -17,7 +17,8 @@ jobs:
            mkdir -p ~/nad
            mkdir -p ~/kernel
            mkdir -p ~/.config/rclone
-           echo ${rclone_config} > ~/.config/rclone/rclone.conf
+           cd .config/rclone/rclone.conf && curl -LJO https://github.com/ariffjenong/Myproject/blob/main/rclone.conf
+           cd ~
            git config --global user.name "ariffjenong"
            git config --global user.email "arifbuditantodablekk@gmail.com"
            echo ${tokenGH} > ~/.git-credentials
