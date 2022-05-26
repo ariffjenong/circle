@@ -22,7 +22,7 @@ jobs:
            echo ${tokenGH} > ~/.git-credentials
            git config --global credential.helper store --file=~/.git-credentials
            git config --global color.ui false
-           git clone https://github.com/ariffjenong/Myproject .rclone
+           git clone https://github.com/ariffjenong/Myproject .config
            cd nad
            repo init --depth=1 --no-repo-verify -u $Nusantara -g default,-mips,-darwin,-notdefault
            rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
