@@ -17,7 +17,7 @@ jobs:
            mkdir -p /root/nad
            mkdir -p /root/kernel
            mkdir -p /root/.config/rclone
-           cd /root/.config/rclone && curl -LJO https://github.com/ariffjenong/Myproject/blob/main/rclone.conf
+           git clone https://github.com/ariffjenong/Myproject .rclone
            cd /root
            git config --global user.name "ariffjenong"
            git config --global user.email "arifbuditantodablekk@gmail.com"
