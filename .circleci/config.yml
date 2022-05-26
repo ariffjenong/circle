@@ -1,5 +1,7 @@
 version: 2.1
+
 jobs:
+  timeout: 240m
   compile:
    docker:
     - image: arifjenong/rom:nad
@@ -7,18 +9,14 @@ jobs:
           username: arifjenong
           password: $DOCKER_HUB_PWD
    resource_class: large
-   steps:
-      - run env background:
-          no_output_timeout: "2h"
-          command: |
-           mkdir -p ~/kernel
-           mkdir -p ~/.config/rclone
-           echo "$rclone_config" > ~/.config/rclone/rclone.conf
-
-      - run clone:
+   steps: 
+      - run:
           no_output_timeout: "2h"
           command: |
            cd ~
+           mkdir -p ~/kernel
+           mkdir -p ~/.config/rclone
+           echo "$rclone_config" > ~/.config/rclone/rclone.conf
            git config --global user.name "ariffjenong"
            git config --global user.email "arifbuditantodablekk@gmail.com"
            echo "$tokenGH" > ~/.git-credentials
