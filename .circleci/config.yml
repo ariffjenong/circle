@@ -16,7 +16,6 @@ jobs:
            cd ~
            mkdir -p ~/nad
            mkdir -p ~/kernel
-           mkdir -p ~/.config/rclone
            git config --global user.name "ariffjenong"
            git config --global user.email "arifbuditantodablekk@gmail.com"
            echo ${tokenGH} > ~/.git-credentials
