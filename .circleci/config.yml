@@ -1,21 +1,22 @@
 version: 2.1
-env:
-    ROM_PROJECT: "lineage-19.1"
 jobs:
   compile:
    docker:
     - image: arifjenong/rom:nad
       auth:
+          username: arifjenong
+          password: $DOCKER_HUB_PWD
    resource_class: large
-   timeout: 240m
    steps:
       - run env background:
+          no_output_timeout: "2h"
           command: |
            mkdir -p ~/kernel
            mkdir -p ~/.config/rclone
            echo "$rclone_config" > ~/.config/rclone/rclone.conf
 
       - run clone:
+          no_output_timeout: "2h"
           command: |
            cd ~
            git config --global user.name "ariffjenong"
