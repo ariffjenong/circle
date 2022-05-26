@@ -27,6 +27,7 @@ jobs:
            rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
            #rclone copy znxtproject:NusantaraProject/manifest/local_nad.xml .repo/local_manifests -P
            repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+           repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
            git clone --depth=1 https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b maple_dsds-12.1 kernel/sony/msm8998
            git clone --depth=1 https://github.com/NusantaraROM-Devices/android_device_sony_yoshino-common 12.1 device/sony/yoshino-common
            git clone --depth=1 https://github.com/NusantaraROM-Devices/android_device_sony_maple_dsds 12.1 device/sony/maple_dsds
@@ -35,6 +36,13 @@ jobs:
            git fetch https://github.com/DerpFest-12/kernel_oneplus_msm8998 12.1
            git cherry-pick 195aed2278b65f8ccab18d59173b96c5b9b55927 d631cbbcbcea8c8a1eea968f539b751fd74e8429 1165eac22e4d141e3033620a131d213e40e387ee 345ce263d38ec29e1f49dd0273888501783291ab 183fa48f490cf197d41bbc6e010f1eededdb4e7d f10fc37bf63f930322a6e13266ad1b25ecf5764c e600b7b2bf726b8bd54cd8537d0f07fe14d90467 fe791c966bda387ad080a1cf36a14695cd1f201b 0cd88d948ec4785f44976fbbeb3261d391cc6a38 6f811c8a87310d1ce16e4c903f8158b5d4fa8e4f 9cd63cde188cb16f3fe0e39b637303f5f9b4f240 dd6af6687da964b33cc11d9ea33f8630453e395e e6e461103c8f0ea831b14b4738827cad313b5969 238f46e82831b941bc4aae885029967f84e869e6 43a5ec3ab13f9a2424bdb278e1429edb81a93493 f068572af6d400b57d1e128a99a48500386fe323 6c404c4e65cd0287216e5754f03ddc4220e1bd50 bad2682f96d0dcb1828e950ed3fdfd1ebff3b5a4 57c6c1db66d6162045d736da1fa3c653d96182d4 eacd7502a52ac4b3762d1dd779ed15efe592e742 e94b380e25b2a61290f243ee24c4c0c0d255b446 3f1f4023e8cdd24a5d83c46de11c64fbd89ff5ca e702fd289bfd35da8941706984ade93826fe0bbe 4c891fb2a91c70330a27dffeba85ef04c491cd8e 28982c2c5c69239aeeb044756b6ee2e8a194c018 c80eeb3d928895b98be199b0d49d700f51739c75 14d9673e86644c38641499fba538d092bcbaebec e0f0fc0a2c65c873a7507089980b8e64e5112285 b987300fb6143b4aaf3c7d3d766cab5e1a36dd30 1d2d7a0b11174f185e13797336f8a0ed1ca7f416 1dcb385a2c85beefa51a39878921688c155263ff 1e75d22c54b1750a67fd69a67e14e633af79e0a9 654f35d96850e170cb33b39b72b6f3999b54cab8 137826cf50e03c3dee4374c39d7b5211fb3e0606 0f4e050e253091559a1f06a7c396be5fd0a2056d 0f6fa355d9f61d742b64d18e0be7b19dde6d4671 66503e0dfe46540d13bd0b0cded59acb1fe37e36 888e4bd7d09e8771ec6c01c17ca65bfbd49361b5 1cf4fbd92c95d9ae814296b8c86ea5883aab5a0f
            cd ~
+           . build/envsetup.sh
+           export BUILD_HOSTNAME=znxt
+           export BUILD_USERNAME=znxt
+           export TZ=Asia/Jakarta
+           export USE_GAPPS=true
+           export NAD_BUILD_TYPE=OFFICIAL
+           export USE_PIXEL_CHARGING=true
            lunch nad_maple_dsds-user
            make bootimage
            rclone copy out/tar*/pr*/*dsds/boot.img znxtproject:NusantaraProject/kernel -P
